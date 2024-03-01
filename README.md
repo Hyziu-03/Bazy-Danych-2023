@@ -1,3 +1,3 @@
 # Bazy Danych
 
-AGH, WGGiOŚ, Geoinformatyka, Semestr letni, 2023/2024
+Geoinformatyka na WGGiOŚ AGH, Semestr letni 2023/2024
