@@ -1,17 +1,19 @@
 -- Utwórz nową bazę danych nazywając ją firma
 
+/*
 CREATE DATABASE firma;
 USE firma;
+CREATE SCHEMA rozliczenia;
+*/
 
 -- Dodaj nowy schemat o nazwie rozliczenia
-
-CREATE SCHEMA rozliczenia;
 
 -- Dodaj do schematu rozliczenia cztery tabele
 -- Ustal typu danych, aby przetwarzanie i składowanie było optymalne
 -- Zastanów się, które pola muszą przyjmować wartość NOT NULL
 -- Ustaw klucz główny dla każdej tabeli
 
+/*
 CREATE TABLE rozliczenia.pracownicy (
     id_pracownika SMALLINT PRIMARY KEY NOT NULL,
     imie VARCHAR(35) NOT NULL,
@@ -39,9 +41,11 @@ CREATE TABLE rozliczenia.premie (
     rodzaj VARCHAR(35),
     kwota SMALLINT NOT NULL
 );
+*/
 
 -- Dodaj klucze obce tam gdzie występują
 
+/*
 ALTER TABLE rozliczenia.godziny
 ADD FOREIGN KEY (id_pracownika) 
 REFERENCES rozliczenia.pracownicy(id_pracownika);
@@ -49,9 +53,11 @@ REFERENCES rozliczenia.pracownicy(id_pracownika);
 ALTER TABLE rozliczenia.pensje
 ADD FOREIGN KEY (id_premii)
 REFERENCES rozliczenia.premie(id_premii);
+*/
 
 -- Wypełnij każdą tabelę 10. rekordami
 
+/*
 INSERT INTO rozliczenia.pracownicy (id_pracownika, imie, nazwisko, adres, telefon) VALUES
 (1, 'Jan', 'Kowalski', 'ul. Wiejska 1, 00-001 Warszawa', '+48123456789'),
 (2, 'Anna', 'Nowak', 'ul. Ogrodowa 5, 30-005 Kraków', '+48987654321'),
@@ -76,18 +82,6 @@ INSERT INTO rozliczenia.godziny (id_godziny, data, liczba_godzin, id_pracownika)
 (9, '2024-04-09', 86, 9),
 (10, '2024-04-10', 76, 10);
 
-INSERT INTO rozliczenia.pensje (id_pensji, stanowisko, kwota, id_premii) VALUES
-(1, 'Programista', 12000, 1),
-(2, 'Analityczka', 1100, 2),
-(3, 'Księgowy', 10000, 3),
-(4, 'Specjalistka ds. sprzedaży', 10000, 4),
-(5, 'Administrator systemów', 12000, 5),
-(6, 'Doradczyni klienta', 10000, 6),
-(7, 'Inżynier oprogramowania', 13000, 7),
-(8, 'Specjalistka ds. logistyki', 11000, 8),
-(9, 'Projektant graficzny', 12000, 9),
-(10, 'Specjalistka ds. marketingu', 11000, 10);
-
 INSERT INTO rozliczenia.premie (id_premii, rodzaj, kwota) VALUES
 (1, 'Premia za staż pracy', 1000),
 (2, 'Premia za staż pracy', 1000),
@@ -100,7 +94,22 @@ INSERT INTO rozliczenia.premie (id_premii, rodzaj, kwota) VALUES
 (9, 'Premia za innowacje', 700),
 (10, 'Premia za innowacje', 700);
 
+INSERT INTO rozliczenia.pensje (id_pensji, stanowisko, kwota, id_premii) VALUES
+(1, 'Programista', 12000, 1),
+(2, 'Analityczka', 1100, 2),
+(3, 'Księgowy', 10000, 3),
+(4, 'Specjalistka ds. sprzedaży', 10000, 4),
+(5, 'Administrator systemów', 12000, 5),
+(6, 'Doradczyni klienta', 10000, 6),
+(7, 'Inżynier oprogramowania', 13000, 7),
+(8, 'Specjalistka ds. logistyki', 11000, 8),
+(9, 'Projektant graficzny', 12000, 9),
+(10, 'Specjalistka ds. marketingu', 11000, 10);
+*/
+
 -- Wyświetl nazwiska pracowników i ich adresy
 
+/*
 SELECT nazwisko, adres 
 FROM rozliczenia.pracownicy;
+*/
