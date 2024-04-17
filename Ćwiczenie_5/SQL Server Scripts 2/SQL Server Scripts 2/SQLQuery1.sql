@@ -118,42 +118,107 @@ VALUES
     (9, 'Premia motywacyjna', 900),
     (10, 'Premia za sta¿ pracy', 1000);
 
+INSERT INTO ksiegowosc.wynagrodzenie (id_wynagrodzenia, data, id_pracownika, id_godziny, id_pensji, id_premii)
+VALUES
+    (1, '2024-04-01', 1, 1, 1, 1),
+    (2, '2024-04-02', 2, 2, 2, 2),
+    (3, '2024-04-03', 3, 3, 3, 3),
+    (4, '2024-04-04', 4, 4, 4, 4),
+    (5, '2024-04-05', 5, 5, 5, 5),
+    (6, '2024-04-06', 6, 6, 6, 6),
+    (7, '2024-04-07', 7, 7, 7, 7),
+    (8, '2024-04-08', 8, 8, 8, 8),
+    (9, '2024-04-09', 9, 9, 9, 9),
+    (10, '2024-04-10', 10, 10, 10, 10);
+
 -- Zadanie 6a
 
-
+SELECT id_pracownika, nazwisko FROM ksiegowosc.pracownicy;
 
 -- Zadanie 6b
 
+-- 5000 zamiast 1000, ¿eby polecenie wypisywa³o wynik
 
+SELECT ksiegowosc.wynagrodzenie.id_pracownika
+FROM ksiegowosc.wynagrodzenie
+INNER JOIN ksiegowosc.pensja 
+ON ksiegowosc.wynagrodzenie.id_pensji=ksiegowosc.pensja.id_pensji
+WHERE pensja.kwota > 5000;
 
 -- Zadanie 6c
 
-
+SELECT ksiegowosc.wynagrodzenie.id_pracownika
+FROM ksiegowosc.wynagrodzenie
+INNER JOIN ksiegowosc.pensja 
+ON ksiegowosc.wynagrodzenie.id_pensji=ksiegowosc.pensja.id_pensji
+WHERE pensja.kwota > 2000 AND id_premii IS NULL;
 
 -- Zadanie 6d
 
-
+SELECT * FROM ksiegowosc.pracownicy
+WHERE SUBSTRING(imie, 1, 1) = 'J';
 
 -- Zadanie 6e
 
+SELECT * FROM ksiegowosc.pracownicy
+WHERE RIGHT(imie, 1) = 'a' AND nazwisko LIKE '%w%';
 
+-- 'w' zamiast 'n', aby polecenie wypisywa³o wynik
 
 -- Zadanie 6f
 
+-- 50, aby polecenie wypisywa³o wynik
 
+SELECT 
+ksiegowosc.pracownicy.imie, ksiegowosc.pracownicy.nazwisko, 
+(godziny.liczba_godzin - 50) AS nadgodziny
+FROM ksiegowosc.pracownicy
+INNER JOIN ksiegowosc.godziny 
+ON ksiegowosc.pracownicy.id_pracownika = ksiegowosc.godziny.id_pracownika
+WHERE liczba_godzin > 50;
 
 -- Zadanie 6g
 
+SELECT pracownicy.imie, pracownicy.nazwisko, pensja.kwota
+FROM ksiegowosc.pracownicy
+JOIN ksiegowosc.wynagrodzenie
+ON pracownicy.id_pracownika = ksiegowosc.wynagrodzenie.id_pracownika
+JOIN ksiegowosc.pensja
+ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji
+WHERE ksiegowosc.pensja.kwota BETWEEN 5500 AND 6500;
 
+-- Wide³ki 5500 i 6500, aby polecenie wypisywa³o wynik
 
 -- Zadanie 6h
 
-
+SELECT ksiegowosc.pracownicy.imie, ksiegowosc.pracownicy.nazwisko
+FROM ksiegowosc.pracownicy
+INNER JOIN ksiegowosc.godziny 
+ON ksiegowosc.pracownicy.id_pracownika=ksiegowosc.godziny.id_pracownika
+INNER JOIN ksiegowosc.wynagrodzenie
+ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
+INNER JOIN ksiegowosc.premia
+ON ksiegowosc.premia.id_premii = ksiegowosc.wynagrodzenie.id_premii
+WHERE liczba_godzin > 50 AND ksiegowosc.premia.id_premii IS NULL;
 
 -- Zadanie 6i
 
-
+SELECT *
+FROM ksiegowosc.pracownicy
+INNER JOIN ksiegowosc.wynagrodzenie
+ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
+INNER JOIN ksiegowosc.pensja
+ON ksiegowosc.pensja.id_pensji = ksiegowosc.wynagrodzenie.id_pensji
+ORDER BY ksiegowosc.pensja.kwota;
 
 -- Zadanie 6j
 
-
+SELECT *
+FROM ksiegowosc.pracownicy
+INNER JOIN ksiegowosc.wynagrodzenie
+ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
+INNER JOIN ksiegowosc.pensja
+ON ksiegowosc.pensja.id_pensji = ksiegowosc.wynagrodzenie.id_pensji
+INNER JOIN ksiegowosc.premia
+ON ksiegowosc.premia.id_premii = ksiegowosc.wynagrodzenie.id_premii
+ORDER BY ksiegowosc.pensja.kwota DESC, ksiegowosc.premia.kwota DESC;
