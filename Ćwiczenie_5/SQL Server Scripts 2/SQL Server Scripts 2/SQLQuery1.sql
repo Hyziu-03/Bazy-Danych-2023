@@ -170,10 +170,10 @@ WHERE RIGHT(imie, 1) = 'a' AND nazwisko LIKE '%w%';
 -- 50, aby polecenie wypisywa³o wynik
 
 SELECT 
-ksiegowosc.pracownicy.imie, ksiegowosc.pracownicy.nazwisko, 
-(godziny.liczba_godzin - 50) AS nadgodziny
+	ksiegowosc.pracownicy.imie, ksiegowosc.pracownicy.nazwisko, 
+	(godziny.liczba_godzin - 50) AS nadgodziny
 FROM ksiegowosc.pracownicy
-INNER JOIN ksiegowosc.godziny 
+	INNER JOIN ksiegowosc.godziny 
 ON ksiegowosc.pracownicy.id_pracownika = ksiegowosc.godziny.id_pracownika
 WHERE liczba_godzin > 50;
 
@@ -181,9 +181,9 @@ WHERE liczba_godzin > 50;
 
 SELECT pracownicy.imie, pracownicy.nazwisko, pensja.kwota
 FROM ksiegowosc.pracownicy
-JOIN ksiegowosc.wynagrodzenie
+	JOIN ksiegowosc.wynagrodzenie
 ON pracownicy.id_pracownika = ksiegowosc.wynagrodzenie.id_pracownika
-JOIN ksiegowosc.pensja
+	JOIN ksiegowosc.pensja
 ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji
 WHERE ksiegowosc.pensja.kwota BETWEEN 5500 AND 6500;
 
@@ -193,11 +193,11 @@ WHERE ksiegowosc.pensja.kwota BETWEEN 5500 AND 6500;
 
 SELECT ksiegowosc.pracownicy.imie, ksiegowosc.pracownicy.nazwisko
 FROM ksiegowosc.pracownicy
-INNER JOIN ksiegowosc.godziny 
+	INNER JOIN ksiegowosc.godziny 
 ON ksiegowosc.pracownicy.id_pracownika=ksiegowosc.godziny.id_pracownika
-INNER JOIN ksiegowosc.wynagrodzenie
+	INNER JOIN ksiegowosc.wynagrodzenie
 ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
-INNER JOIN ksiegowosc.premia
+	INNER JOIN ksiegowosc.premia
 ON ksiegowosc.premia.id_premii = ksiegowosc.wynagrodzenie.id_premii
 WHERE liczba_godzin > 50 AND ksiegowosc.premia.id_premii IS NULL;
 
@@ -205,9 +205,9 @@ WHERE liczba_godzin > 50 AND ksiegowosc.premia.id_premii IS NULL;
 
 SELECT *
 FROM ksiegowosc.pracownicy
-INNER JOIN ksiegowosc.wynagrodzenie
+	INNER JOIN ksiegowosc.wynagrodzenie
 ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
-INNER JOIN ksiegowosc.pensja
+	INNER JOIN ksiegowosc.pensja
 ON ksiegowosc.pensja.id_pensji = ksiegowosc.wynagrodzenie.id_pensji
 ORDER BY ksiegowosc.pensja.kwota;
 
@@ -215,10 +215,10 @@ ORDER BY ksiegowosc.pensja.kwota;
 
 SELECT *
 FROM ksiegowosc.pracownicy
-INNER JOIN ksiegowosc.wynagrodzenie
+	INNER JOIN ksiegowosc.wynagrodzenie
 ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
-INNER JOIN ksiegowosc.pensja
+	INNER JOIN ksiegowosc.pensja
 ON ksiegowosc.pensja.id_pensji = ksiegowosc.wynagrodzenie.id_pensji
-INNER JOIN ksiegowosc.premia
+	INNER JOIN ksiegowosc.premia
 ON ksiegowosc.premia.id_premii = ksiegowosc.wynagrodzenie.id_premii
 ORDER BY ksiegowosc.pensja.kwota DESC, ksiegowosc.premia.kwota DESC;
