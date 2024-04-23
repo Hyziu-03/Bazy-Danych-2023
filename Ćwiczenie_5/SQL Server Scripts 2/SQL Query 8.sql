@@ -1,3 +1,5 @@
+-- Æwiczenie 5
+
 USE firma;
 
 -- Poprawki
@@ -63,12 +65,38 @@ GROUP BY stanowisko;
 
 -- Zadanie 6g
 
+SELECT 
+	ksiegowosc.pensja.stanowisko,
+	COUNT(ksiegowosc.premia.id_premii) AS liczba_premii
+FROM ksiegowosc.wynagrodzenie
+	JOIN ksiegowosc.pracownicy
+ON ksiegowosc.wynagrodzenie.id_pracownika = ksiegowosc.pracownicy.id_pracownika
+	JOIN ksiegowosc.premia
+ON ksiegowosc.wynagrodzenie.id_premii = ksiegowosc.premia.id_premii
+	JOIN ksiegowosc.pensja 
+ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji
+GROUP BY ksiegowosc.pensja.stanowisko;
 
+-- Zadanie 6h
 
--- Zadanie 6h?
+-- B³¹d "The DELETE statement conflicted with the REFERENCE constraint", wiêc...
 
-SELECT * FROM ksiegowosc.pracownicy
-	INNER JOIN ksiegowosc.wynagrodzenie
-ON ksiegowosc.pracownicy.id_pracownika = ksiegowosc.wynagrodzenie.id_pracownika
-	INNER JOIN ksiegowosc.pensja
-ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji;
+ALTER TABLE ksiegowosc.godziny
+DROP CONSTRAINT FK__godziny__id_prac__398D8EEE;
+
+ALTER TABLE ksiegowosc.wynagrodzenie
+DROP CONSTRAINT FK__wynagrodz__id_pr__403A8C7D;
+
+DELETE FROM ksiegowosc.pracownicy 
+WHERE ksiegowosc.pracownicy.id_pracownika 
+	IN ( 
+		SELECT ksiegowosc.pracownicy.id_pracownika FROM ksiegowosc.wynagrodzenie
+			INNER JOIN ksiegowosc.pracownicy
+		ON ksiegowosc.pracownicy.id_pracownika = ksiegowosc.wynagrodzenie.id_pracownika
+			INNER JOIN ksiegowosc.pensja
+		ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji
+		WHERE ksiegowosc.pensja.kwota < 5500
+	);
+
+-- Æwiczenie 6
+
