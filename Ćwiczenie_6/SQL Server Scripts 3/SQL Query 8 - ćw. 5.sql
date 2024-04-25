@@ -1,4 +1,4 @@
--- Æwiczenie 5
+-- ï¿½wiczenie 5
 
 USE firma;
 
@@ -14,7 +14,7 @@ WHERE stanowisko = 'Dyrektor';
 
 UPDATE ksiegowosc.pensja 
 SET stanowisko = 'Analityczka finansowa'
-WHERE stanowisko = 'Ksiêgowa';
+WHERE stanowisko = 'Ksiï¿½gowa';
 
 UPDATE ksiegowosc.pensja 
 SET stanowisko = 'Administrator sieci'
@@ -79,7 +79,7 @@ GROUP BY ksiegowosc.pensja.stanowisko;
 
 -- Zadanie 6h
 
--- B³¹d "The DELETE statement conflicted with the REFERENCE constraint", wiêc...
+-- Bï¿½ï¿½d "The DELETE statement conflicted with the REFERENCE constraint", wiï¿½c...
 
 ALTER TABLE ksiegowosc.godziny
 DROP CONSTRAINT FK__godziny__id_prac__398D8EEE;
@@ -97,6 +97,3 @@ WHERE ksiegowosc.pracownicy.id_pracownika
 		ON ksiegowosc.wynagrodzenie.id_pensji = ksiegowosc.pensja.id_pensji
 		WHERE ksiegowosc.pensja.kwota < 5500
 	);
-
--- Æwiczenie 6
-
