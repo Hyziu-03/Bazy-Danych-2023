@@ -10,6 +10,8 @@ ALTER COLUMN telefon VARCHAR(20);
 UPDATE ksiegowosc.pracownicy
 SET telefon = '(+48) ' + telefon;
 
+SELECT * FROM ksiegowosc.pracownicy;
+
 -- Zadanie b
 
 UPDATE ksiegowosc.pracownicy
@@ -25,7 +27,12 @@ SET telefon = CONCAT(
 
 -- Zadanie c 
 
-SELECT * FROM ksiegowosc.pracownicy
+SELECT 
+	id_pracownika,
+	UPPER(imie),
+	UPPER(nazwisko),
+	UPPER(adres)
+FROM ksiegowosc.pracownicy
 WHERE nazwisko IN (
 	SELECT MAX(nazwisko) FROM ksiegowosc.pracownicy
 );
