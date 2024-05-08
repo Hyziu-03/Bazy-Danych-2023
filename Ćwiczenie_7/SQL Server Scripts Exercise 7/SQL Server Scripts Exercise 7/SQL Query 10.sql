@@ -70,7 +70,7 @@ END
 -- ALTER TABLE Person.Person
 -- ALTER COLUMN rowguid VARCHAR(50);
 
--- Zadanie 3?
+-- Zadanie 3
 -- Przygotuj trigger taxRateMonitoring, który wyœwietli...
 -- ...komunikat o b³êdzie, je¿eli nast¹pi zmiana...
 -- ...wartoœci w polu ‘TaxRate’ o wiêcej ni¿ 30%.
@@ -78,5 +78,11 @@ END
 CREATE OR ALTER TRIGGER taxRateMonitoring
 ON Sales.SalesTaxRate FOR UPDATE AS
 BEGIN
+	SELECT @new = SalexTaxRate FROM deleted;
+	SELECT @old = SalexTaxRate FROM inserted;
 	
+	IF ABS(@old - @new) > (0.30 * @old)
+	BEGIN
+		RAISERROR('ERROR: It is prohibited to change TaxRate by more than 30%', 1, 1)
+	END
 END
