@@ -18,6 +18,7 @@ SELECT * FROM GetEmpInfo;
 -- Zadanie 2
 
 USE AdventureWorksLT2022;
+
 WITH GetContRev AS (
 	SELECT 
 		SalesLT.Customer.CompanyName AS CompanyContact, 
